@@ -7,6 +7,8 @@ public enum PlayerState
     walk,
     attack,
     interact,
+    stagger,
+    idle
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -42,13 +44,14 @@ public class PlayerMovement : MonoBehaviour
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButton("attack") && currentState != PlayerState.attack)
+        //input for the attack animation , cant attack while staggered
+        if (Input.GetButton("attack") && currentState != PlayerState.attack
+            && currentState != PlayerState.stagger)
         {
-            Debug.Log("ATTAAACK");
             StartCoroutine(AttackCo());
         }
 
-        else if(currentState == PlayerState.walk)
+        else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
         {
             updateAnimationAndMove();
         }
@@ -56,11 +59,32 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public void Knock(float knockTime)
+    {
+        StartCoroutine(KnockCo(knockTime));
+    }
+
+    private IEnumerator KnockCo(float knockTime)
+    {
+        //make it so that staggers are not stacked and forces dont multiply
+        if (myRigidBody != null)
+        {
+            yield return new WaitForSeconds(knockTime);
+            myRigidBody.velocity = Vector2.zero;
+            currentState = PlayerState.idle;
+            myRigidBody.velocity = Vector2.zero;
+
+        }
+    }
+
     private IEnumerator AttackCo()
     {
+        //set player state to attack and freeze movement
         animator.SetBool("attacking", true);
         currentState = PlayerState.attack;
         yield return null;
+
+        //if the attack has finished, return the ability to move
         animator.SetBool("attacking", false);
         yield return new WaitForSeconds(.3f);
         currentState = PlayerState.walk;
