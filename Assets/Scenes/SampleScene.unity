@@ -978,6 +978,7 @@ RectTransform:
   m_Children:
   - {fileID: 1154970942}
   - {fileID: 302401602}
+  - {fileID: 2062118858}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1062,6 +1063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2.5
   knockTime: 0.2
+  damage: 1
 --- !u!1 &889348041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,6 +1185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   health: 2
+  maxHealth: {fileID: 11400000, guid: c5663923198cdcd4c8a5332c1b0cebcf, type: 2}
   enemyName: Larry the log
   baseAttack: 1
   moveSpeed: 1.5
@@ -1190,6 +1193,7 @@ MonoBehaviour:
   chaseRadius: 4
   attackRadius: 1.2
   homePosition: {fileID: 0}
+  anim: {fileID: 889348042}
 --- !u!61 &889348046
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1277,6 +1281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2
   knockTime: 0.2
+  damage: 0
 --- !u!1 &1002767199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,6 +1360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2.5
   knockTime: 0.2
+  damage: 1
 --- !u!1 &1107930728
 GameObject:
   m_ObjectHideFlags: 0
@@ -29014,6 +29020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2.5
   knockTime: 0.2
+  damage: 1
 --- !u!1 &1690272062
 GameObject:
   m_ObjectHideFlags: 0
@@ -29448,6 +29455,111 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 2.5
   knockTime: 0.2
+  damage: 1
+--- !u!1 &2062118857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2062118858}
+  - component: {fileID: 2062118861}
+  - component: {fileID: 2062118860}
+  - component: {fileID: 2062118859}
+  m_Layer: 5
+  m_Name: HealthHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2062118858
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062118857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 661777212}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 134.02582, y: -89.94833}
+  m_SizeDelta: {x: 214.2624, y: 134.7277}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2062118859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062118857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5b01c353e66bc478d0cf77a26d7743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: df9acbe6aa63876458929b4db09e4206, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2062118857}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2062118860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062118857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -3855957774892257989, guid: b7cfde34e26df4841a5fbeb515935451, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2062118861
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062118857}
+  m_CullTransparentMesh: 1
 --- !u!1001 &4531649014143537999
 PrefabInstance:
   m_ObjectHideFlags: 0

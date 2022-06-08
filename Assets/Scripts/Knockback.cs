@@ -7,18 +7,7 @@ public class Knockback : MonoBehaviour
 
     public float thrust;
     public float knockTime;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float damage;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,10 +28,10 @@ public class Knockback : MonoBehaviour
                 hit.AddForce(difference, ForceMode2D.Impulse);
 
                 //if the hit object is an enemy change state to staggered
-                if (other.gameObject.CompareTag("enemy"))
+                if (other.gameObject.CompareTag("enemy") && other.isTrigger)
                 {
                     hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                    other.GetComponent<Enemy>().Knock(hit, knockTime);
+                    other.GetComponent<Enemy>().Knock(hit, knockTime, damage);
                 }
 
                 if (other.gameObject.CompareTag("Player"))
