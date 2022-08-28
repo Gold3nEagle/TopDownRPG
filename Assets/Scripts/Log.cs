@@ -37,7 +37,6 @@ public class Log : Enemy
                 Vector3 temp = Vector3.MoveTowards(transform.position, 
                     target.position, moveSpeed * Time.deltaTime);
 
-                Debug.Log(temp);
 
                 changeAnim(temp - transform.position);
                 myRigidbody.MovePosition(temp);
