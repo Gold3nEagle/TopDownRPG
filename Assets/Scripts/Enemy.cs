@@ -1,23 +1,23 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyState
-{
+public enum EnemyState{
     idle,
     walk,
     attack,
     stagger
 }
 
-public class Enemy : MonoBehaviour
-{
+public class Enemy : MonoBehaviour {
+
     public EnemyState currentState;
-    public float health;
     public FloatValue maxHealth;
+    public float health;
     public string enemyName;
     public int baseAttack;
     public float moveSpeed;
+    public GameObject deathEffect;
 
     private void Awake()
     {
@@ -29,27 +29,34 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
+            DeathEffect();
             this.gameObject.SetActive(false);
         }
     }
 
-    public void Knock(Rigidbody2D myRigidBody, float knockTime, float damage)
+    private void DeathEffect()
     {
-        StartCoroutine(KnockCo(myRigidBody, knockTime));
+        if(deathEffect != null)
+        {
+            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 1f);
+        }
+    }
+
+    public void Knock(Rigidbody2D myRigidbody, float knockTime, float damage)
+    {
+        StartCoroutine(KnockCo(myRigidbody, knockTime));
         TakeDamage(damage);
     }
 
-    //method for the enemy knock squence once hit by the player
-    private IEnumerator KnockCo(Rigidbody2D myRigidBody , float knockTime)
+    private IEnumerator KnockCo(Rigidbody2D myRigidbody, float knockTime)
     {
-        //make it so that staggers are not stacked and forces dont multiply
-        if (myRigidBody != null)
+        if (myRigidbody != null)
         {
             yield return new WaitForSeconds(knockTime);
-            myRigidBody.velocity = Vector2.zero;
+            myRigidbody.velocity = Vector2.zero;
             currentState = EnemyState.idle;
-            myRigidBody.velocity = Vector2.zero;
-
+            myRigidbody.velocity = Vector2.zero;
         }
     }
 }
